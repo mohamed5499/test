@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Virginia Land | Restaurant &amp; Cafe</title>
+<meta name="description" content="Virginia Land restaurant &amp; cafe. Hot and iced coffee, frappes, milkshakes, waffles, pancakes and desserts.">
+<meta name="theme-color" content="#1D0F0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --red:        #B3242E;
+    --red-dark:   #7A141A;
+    --gold:       #D9A93F;
+    --gold-dark:  #9E751D;
+    --gold-soft:  #F5E2B0;
+    --cream:      #FFF9EE;
+    --cream-card: #FDF3E3;
+    --white:      #FFFFFF;
+    --ink:        #2B1A1B;
+    --ink-soft:   #6E5A5B;
+    --night:      #1D0F0B;
+    --night-card: #281713;
+    
+    --display: "Fraunces", Georgia, serif;
+    --body: "Figtree", system-ui, -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+  }
+  
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { 
+    margin: 0; 
+    font-family: var(--body); 
+    color: var(--ink); 
+    background: var(--night); 
+    line-height: 1.4; 
+    -webkit-font-smoothing: antialiased; 
+  }
+  
+  /* إضافة cursor: pointer لضمان استجابة Safari iOS للأزرار */
+  a, button, .chip, .close-btn, .menu-cta { 
+    cursor: pointer; 
+    touch-action: manipulation;
+  }
+  
+  svg { display: block; }
+
+  /* Topbar */
+  .topbar {
+    background: var(--red); color: var(--white);
+    display: flex; justify-content: center; align-items: center;
+    padding: 10px 14px; font-weight: 700; font-size: 0.88rem; text-align: center;
+    border-bottom: 1px solid var(--gold);
+  }
+  .topbar a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: inherit; }
+  .topbar svg { width: 16px; height: 16px; color: var(--gold-soft); flex-shrink: 0; }
+  .topbar .num { font-weight: 800; letter-spacing: 0.03em; direction: ltr; unicode-bidi: isolate; }
+
+  /* Hero */
+  .hero {
+    text-align: center; padding: 28px 16px 20px;
+    background: radial-gradient(circle at 50% 0%, rgba(217, 169, 63, 0.22), transparent 70%), var(--night);
+  }
+  .hero .logo { width: 90px; height: 90px; margin: 0 auto 12px; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)); }
+  .hero .logo svg { width: 100%; height: 100%; }
+  .hero h1 {
+    margin: 0; font-family: var(--display); font-weight: 800; color: var(--cream);
+    font-size: 2.3rem; line-height: 1; letter-spacing: -0.01em;
+  }
+  .hero .sub {
+    margin: 8px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px;
+    color: var(--gold); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .hero .sub::before, .hero .sub::after { content: ""; width: 20px; height: 2px; background: var(--gold); }
+
+  .wrap { width: 100%; padding: 0 16px 36px; margin: 0 auto; }
+
+  /* Menu CTA Button */
+  .menu-cta {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    margin-top: 16px; padding: 18px 20px; border: 2px solid var(--gold-soft); border-radius: 20px;
+    background: linear-gradient(135deg, var(--gold) 0%, #C4922A 100%); 
+    color: var(--night); text-align: left;
+    box-shadow: 0 6px 0 var(--gold-dark), 0 12px 25px rgba(0,0,0,0.5);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .menu-cta:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--gold-dark), 0 4px 10px rgba(0,0,0,0.3); }
+  .menu-cta .word { font-family: var(--display); font-weight: 800; font-size: 2.1rem; line-height: 1; color: var(--night); display: block; }
+  .menu-cta .hint { display: block; margin-top: 4px; font-size: 0.82rem; font-weight: 700; color: rgba(29, 15, 11, 0.85); }
+  .menu-cta .go { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--night); color: var(--gold); flex-shrink: 0; }
+  .menu-cta .go svg { width: 20px; height: 20px; }
+
+  /* Links */
+  .links { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .link-card {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 14px 8px 12px; background: var(--cream); border: 2px solid var(--gold); border-radius: 16px;
+    font-weight: 800; font-size: 0.88rem; color: var(--night); text-align: center; text-decoration: none;
+  }
+  .link-card:active { transform: scale(0.97); }
+  .link-card .ic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--red); color: var(--white); }
+  .link-card .ic svg { width: 20px; height: 20px; }
+  .link-card .ic.brand { background: none; }
+  .link-card .ic.brand svg { width: 44px; height: 44px; }
+  .link-card small { font-weight: 600; color: var(--ink-soft); font-size: 0.72rem; }
+
+  /* Call */
+  .call {
+    margin-top: 24px; padding: 24px 16px; text-align: center;
+    background: var(--cream); border-radius: 20px; border: 2px solid var(--gold);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3); color: var(--ink);
+  }
+  .call h2 { margin: 0; font-family: var(--display); font-size: 1.6rem; color: var(--night); }
+  .call p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.85rem; }
+  .call .big-num {
+    display: block; margin: 12px 0 16px; font-family: var(--display); font-weight: 800;
+    font-size: 2rem; color: var(--red); direction: ltr; unicode-bidi: isolate; text-decoration: none;
+  }
+  .call-actions { display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+    padding: 14px; border-radius: 999px; font-weight: 800; font-size: 0.92rem;
+    border: none; text-decoration: none; transition: transform 0.1s ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-red { background: var(--red); color: var(--white); }
+  .btn-white { background: var(--white); color: var(--night); border: 2px solid #E2D1A8; }
+
+  footer { background: #130907; color: rgba(255,248,236,0.6); text-align: center; padding: 16px; font-size: 0.8rem; }
+  footer strong { color: var(--gold); font-family: var(--display); }
+
+  /* ---------- FIXED OVERLAY FOR iOS / Safari ---------- */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999999;
+    display: none; flex-direction: column;
+    background: var(--night); width: 100%;
+    height: 100vh; height: 100dvh;
+    -webkit-overflow-scrolling: touch;
+  }
+  .overlay.active { display: flex !important; }
+
+  .menu-header {
+    flex: none; background: #150A08; color: var(--white); padding: 12px 16px 8px;
+    border-bottom: 2px solid var(--gold); z-index: 10;
+  }
+  .menu-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .menu-header h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.5rem; color: var(--gold-soft); }
+  .menu-header small { color: rgba(255,255,255,0.7); font-size: 0.75rem; display: block; }
+  
+  .close-btn {
+    width: 42px; height: 42px; border-radius: 50%; border: 0;
+    background: var(--gold); color: var(--night); display: grid; place-items: center; flex-shrink: 0;
+    -webkit-appearance: none;
+  }
+  .close-btn svg { width: 22px; height: 22px; }
+
+  .chips-container { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .chips-container::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none; padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 0.82rem;
+    border: 1px solid rgba(217, 169, 63, 0.4); background: rgba(255,255,255,0.05); color: var(--gold-soft);
+    white-space: nowrap; transition: all 0.15s ease;
+    -webkit-appearance: none;
+  }
+  .chip[aria-current="true"] { background: var(--gold); border-color: var(--gold); color: var(--night); font-weight: 800; }
+
+  .menu-body {
+    flex: 1; overflow-y: auto; padding: 16px; background: var(--night);
+    scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+  }
+
+  .cat-section { margin-bottom: 28px; scroll-margin-top: 10px; }
+  .cat-title {
+    font-family: var(--display); font-weight: 800; font-size: 1.5rem; color: var(--gold);
+    margin: 0 0 6px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .cat-note { color: var(--gold-soft); font-size: 0.8rem; margin: 0 0 10px; opacity: 0.8; }
+
+  .cat-banner {
+    position: relative; width: 100%; border-radius: 14px; overflow: hidden;
+    margin-bottom: 12px; border: 1.5px solid var(--gold);
+    aspect-ratio: 16 / 9; background: #000;
+  }
+  .cat-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+  .items-grid { display: flex; flex-direction: column; gap: 8px; }
+  .item-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--night-card); padding: 12px 14px; border-radius: 12px;
+    border: 1px solid rgba(217, 169, 63, 0.2);
+  }
+  .item-info { flex: 1; }
+  .item-name { font-weight: 700; font-size: 0.95rem; color: var(--cream); display: block; }
+  .item-desc { font-weight: 400; font-size: 0.78rem; color: rgba(255, 249, 238, 0.65); margin-top: 2px; display: block; }
+  .item-price {
+    font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--gold);
+    white-space: nowrap; background: rgba(217, 169, 63, 0.1); padding: 4px 10px; border-radius: 8px;
+    border: 1px solid rgba(217, 169, 63, 0.3);
+  }
+  .item-price span { font-size: 0.65rem; font-family: var(--body); font-weight: 600; margin-left: 2px; }
+
+  .table-container { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--gold); -webkit-overflow-scrolling: touch; }
+  table.custom-tbl { width: 100%; border-collapse: collapse; min-width: 300px; font-size: 0.82rem; }
+  .custom-tbl th { background: var(--gold); color: var(--night); padding: 8px 6px; font-weight: 800; text-align: center; }
+  .custom-tbl td { padding: 8px 6px; text-align: center; border-bottom: 1px solid rgba(217,169,63,0.2); color: var(--cream); background: var(--night-card); }
+  .custom-tbl td:first-child { text-align: left; font-weight: 700; color: var(--gold-soft); }
+  .custom-tbl td:not(:first-child) { font-family: var(--display); font-weight: 800; color: var(--gold); }
+
+  @media (min-width: 600px) {
+    .wrap { max-width: 800px; }
+    .hero h1 { font-size: 3.5rem; }
+    .menu-cta .word { font-size: 2.8rem; }
+    .links { grid-template-columns: repeat(4, 1fr); }
+    .call-actions { flex-direction: row; }
+    .btn { width: auto; padding: 14px 28px; }
+    .overlay { max-width: 760px; height: 90vh; margin: auto; border-radius: 20px; border: 2px solid var(--gold); top: 0; bottom: 0; }
+    .items-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <a href="tel:+201155585666" aria-label="Call Virginia Land">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+    Call us: <span class="num">0115 558 5666</span>
+  </a>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="logo" id="logo"></div>
+    <h1>Virginia Land</h1>
+    <p class="sub">Restaurant &amp; Cafe</p>
+  </header>
+
+  <div class="wrap">
+    <button class="menu-cta" type="button" id="open-menu">
+      <span>
+        <span class="word">VIEW MENU</span>
+        <span class="hint">Drinks, Desserts &amp; Food</span>
+      </span>
+      <span class="go">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </span>
+    </button>
+
+    <nav class="links">
+      <a class="link-card" href="https://www.facebook.com/share/1DSd3F1Dy8/?mibextid=wwXIfr" target="_blank" rel="noopener">
+        <span class="ic brand"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5" fill="#fff"/><path fill="#0866FF" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></span>
+        Facebook
+        <small>Our Page</small>
+      </a>
+      <a class="link-card" href="https://www.tiktok.com/@virginia.land_1?_r=1&amp;_t=ZS-99tYL6K9Cl7" target="_blank" rel="noopener">
+        <span class="ic brand"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#000"/><g transform="translate(5.2 5.2) scale(.6)"><path fill="#25F4EE" transform="translate(-.9 -.9)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/><path fill="#FE2C55" transform="translate(.9 .9)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/><path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></g></svg></span>
+        TikTok
+        <small>@virginia.land_1</small>
+      </a>
+      <a class="link-card" href="https://maps.app.goo.gl/2PKTpBihdt4VUzrX9" target="_blank" rel="noopener">
+        <span class="ic brand"><svg viewBox="0 0 24 24"><path fill="#FBBC04" d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.019-2.525-.51-.944-1.145-1.817-1.79-2.671L19.527 4.799z"/><path fill="#34A853" d="M8.545 7.705l-3.959 4.707c.724 1.54 1.821 2.863 2.871 4.18.247.31.494.622.737.936l4.984-5.925-.029.01c-1.741.601-3.691-.291-4.392-1.987a3.377 3.377 0 0 1-.209-.716c-.063-.437-.077-.761-.004-1.198l.001-.007z"/><path fill="#1A73E8" d="M5.492 3.149l-.003.004c-1.947 2.466-2.281 5.88-1.117 8.77l4.785-5.689-.058-.05-3.607-3.035z"/><path fill="#EA4335" d="M14.661.436l-3.838 4.563a.295.295 0 0 1 .027-.01c1.6-.551 3.403.15 4.22 1.626.176.319.323.683.377 1.045.068.446.085.773.012 1.22l-.003.016 3.836-4.561A8.382 8.382 0 0 0 14.67.439l-.009-.003z"/><path fill="#D93025" d="M9.466 5.868L14.162.285l-.047-.012A8.31 8.31 0 0 0 11.986 0a8.439 8.439 0 0 0-6.169 2.766l-.016.018 3.665 3.084z"/></svg></span>
+        Location
+        <small>Open Maps</small>
+      </a>
+      <a class="link-card" href="tel:+201155585666">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+        Call
+        <small>0115 558 5666</small>
+      </a>
+    </nav>
+
+    <section class="call">
+      <h2>Order &amp; Reserve</h2>
+      <p>Direct contact with our team</p>
+      <a class="big-num" href="tel:+201155585666">0115 558 5666</a>
+      <div class="call-actions">
+        <a class="btn btn-red" href="tel:+201155585666">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          Call Now
+        </a>
+        <a class="btn btn-white" href="https://wa.me/201155585666" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <strong>Virginia Land</strong> &middot; Restaurant &amp; Cafe
+</footer>
+
+<!-- Fullscreen Menu Overlay -->
+<div class="overlay" id="overlay">
+  <div class="menu-header">
+    <div class="menu-header-row">
+      <div>
+        <h2>VIRGINIA MENU</h2>
+        <small>Prices are in Egyptian Pounds (EGP)</small>
+      </div>
+      <button class="close-btn" type="button" id="close-menu" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="chips-container" id="chips"></div>
+  </div>
+
+  <div class="menu-body" id="scroller"></div>
+</div>
+
+<script>
+const PHOTOS = {
+  hot: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80",
+  coffee: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
+  espresso: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=800&q=80",
+  iced: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80",
+  frappe: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+  fresh: "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=800&q=80",
+  soft: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=800&q=80",
+  yogurt: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80",
+  snacks: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=800&q=80",
+  sahlab: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=800&q=80",
+  smoothie: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=800&q=80",
+  milkshake: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+  soda: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
+  hotchoc: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=800&q=80",
+  waffles: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80",
+  bubble: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80",
+  desserts: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+  cinnabon: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
+  icecream: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=800&q=80",
+  pancake: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80"
+};
+
+const MENU = [
+  { id: "hot", name: "Hot Corner", items: [
+    ["Tea", 20], ["Green Tea", 25], ["Flavored Tea", 30], ["Milk Tea", 45],
+    ["Herbal Tea", 30], ["Cinnamon, Plain", 30], ["Cinnamon with Milk", 50],
+    ["Hot Cider", 50], ["Nescafé, Black", 40], ["Nescafé with Milk", 50],
+    ["Flavored Nescafé", 75, "Hazelnut, vanilla or caramel"]
+  ]},
+  { id: "coffee", name: "Coffee Corner", note: "Traditional Turkish Coffee", items: [
+    ["Turkish Coffee, Plain", 30], ["Turkish Coffee, Medium", 35], ["Turkish Coffee, Dark", 35],
+    ["Double Turkish Coffee, Plain", 35], ["Double Turkish Coffee, Medium", 40], ["Double Turkish Coffee, Dark", 40],
+    ["Hazelnut Coffee", 55], ["French Coffee", 50], ["Hot Chocolate Coffee", 60]
+  ]},
+  { id: "espresso", name: "Espresso", items: [
+    ["Espresso, Single", 40], ["Espresso, Double", 45], ["Ristretto", 50], ["Americano", 50],
+    ["Macchiato", 45], ["Cortado", 50], ["Flat White", 60], ["Latte", 60],
+    ["Flavored Latte", 75, "Hazelnut, vanilla or caramel"], ["Cappuccino", 65],
+    ["Flavored Cappuccino", 75, "Hazelnut, vanilla or caramel"], ["Mocha", 70], ["White Mocha", 70]
+  ]},
+  { id: "iced", name: "Ice Coffee", items: [
+    ["Iced Latte", 65], ["Flavored Iced Latte", 75, "Hazelnut, vanilla or caramel"],
+    ["Iced Americano", 65], ["Iced Caramel Macchiato", 80], ["Iced Spanish Latte", 75],
+    ["Iced Salted Caramel Latte", 75], ["Iced Mocha", 75], ["Extra add-on", 25]
+  ]},
+  { id: "frappe", name: "Frappe", items: [
+    ["Vanilla Frappe", 70], ["Hazelnut Frappe", 70], ["Caramel Frappe", 70],
+    ["Chocolate Frappe", 70], ["Lotus Frappe", 70], ["Oreo Frappe", 75],
+    ["Nutella Frappe", 75], ["Salted Caramel Frappe", 75], ["Pistachio Frappe", 90]
+  ]},
+  { id: "fresh", name: "Fresh Juices", items: [
+    ["Mango", 70], ["Strawberry", 60], ["Strawberry with Milk", 70], ["Banana with Milk", 60],
+    ["Lemon", 50], ["Lemon Mint", 65], ["Unnab (Jujube)", 55], ["Virginia Fruits", 80], ["Kiwi", 90]
+  ]},
+  { id: "soft", name: "Soft Drinks", items: [
+    ["Water", 10], ["Pepsi", 35], ["Coca-Cola", 35], ["Sprite", 35],
+    ["7Up", 35], ["Mirinda", 35], ["Fayrouz", 35], ["Red Bull", 90], ["Add mint or lemon slice", 5]
+  ]},
+  { id: "yogurt", name: "Yogurt", items: [
+    ["Yogurt with Honey", 65], ["Yogurt with Mixed Nuts", 75], ["Yogurt with Mango", 65],
+    ["Yogurt with Strawberry", 65], ["Yogurt with Banana", 65], ["Yogurt with Blueberry", 65], ["Yogurt with Mixed Fruit", 80]
+  ]},
+  { id: "snacks", name: "Snacks", items: [
+    ["Chips, Salt", 20], ["Chips, Cheese", 25], ["Chips, Chili", 25], ["Indomie, Small", 20], ["Indomie, Large", 30]
+  ]},
+  { id: "sahlab", name: "Sahlab", items: [
+    ["Plain Sahlab", 60], ["Sahlab with Nuts", 75], ["Sahlab with Nutella", 65],
+    ["Sahlab with Lotus", 65], ["Sahlab with Kinder", 75], ["Sahlab with Pistachio", 75], ["Sahlab with Oreo", 65]
+  ]},
+  { id: "smoothie", name: "Smoothie", items: [
+    ["Mango Smoothie", 65], ["Strawberry Smoothie", 65], ["Kiwi Smoothie", 65],
+    ["Blueberry Smoothie", 65], ["Lemon Mint Smoothie", 70], ["Pineapple Smoothie", 60],
+    ["Green Apple Smoothie", 60], ["Peach Smoothie", 60], ["Dragon Fruit Smoothie", 60],
+    ["Strawberry, Kiwi & Mint", 70], ["Strawberry & Kiwi", 70], ["Mixed Fruit Smoothie", 75]
+  ]},
+  { id: "milkshake", name: "Milk Shake", items: [
+    ["Oreo Milk Shake", 80], ["Lotus Milk Shake", 80], ["Nutella Milk Shake", 80],
+    ["Vanilla Milk Shake", 80], ["Caramel Milk Shake", 80], ["Strawberry Milk Shake", 80],
+    ["Mango Milk Shake", 80], ["Hazelnut Milk Shake", 80], ["Chocolate Milk Shake", 80],
+    ["Kinder Milk Shake", 85], ["Pistachio Milk Shake", 85]
+  ]},
+  { id: "soda", name: "Soda Corner", items: [
+    ["Classic Soda", 65], ["Fruit Soda", 65, "Strawberry, mango, kiwi, lemon, pineapple or blueberry"],
+    ["Virginia Soda", 75], ["Add boba", 30]
+  ]},
+  { id: "hotchoc", name: "Hot Chocolate", items: [
+    ["Hot Chocolate", 60], ["Hot Chocolate Oreo", 65], ["Hot Chocolate Lotus", 65],
+    ["Hot Chocolate Nutella", 65], ["Hot Chocolate Caramel", 65], ["Hot Chocolate Hazelnut", 65],
+    ["Hot Chocolate Pistachio", 70], ["Add marshmallow", 20]
+  ]},
+  { id: "waffles", name: "Waffles", items: [
+    ["Nutella Waffle", 80], ["Nutella & Oreo Waffle", 85], ["Dark Nutella Waffle", 80],
+    ["Lotus Waffle", 80], ["Kinder Waffle", 80], ["Pistachio Waffle", 80], ["Caramel Waffle", 80], ["Mixed Fruit Waffle", 100]
+  ]},
+  { id: "bubble", name: "Bubble Waffles", items: [
+    ["Nutella Bubble Waffle", 100], ["Caramel Bubble Waffle", 100], ["Lotus Bubble Waffle", 100],
+    ["Pistachio Bubble Waffle", 100], ["Kinder Bubble Waffle", 100], ["White or Dark Chocolate Bubble Waffle", 100]
+  ]},
+  { id: "desserts", name: "Desserts", items: [
+    ["Molten Cake Nutella", 90], ["Molten Cake Lotus", 90], ["Molten Cake Kinder", 100],
+    ["Molten Cake Pistachio", 100], ["Molten Cake Oreo", 100], ["Molten Cake Caramel", 100]
+  ]},
+  { id: "cinnabon", name: "Cinnabon", items: [
+    ["Classic Cinnabon", 70], ["Nutella Cinnabon", 75], ["Lotus Cinnabon", 75],
+    ["Pistachio Cinnabon", 80], ["Kinder Cinnabon", 75], ["Caramel Cinnabon", 75],
+    ["Dark Chocolate Cinnabon", 70], ["Mixed Nuts Cinnabon", 80]
+  ]},
+  { id: "icecream", name: "Ice Cream", items: [
+    ["Ice Cream, 1 scoop", 25], ["Ice Cream, 2 scoops", 40], ["Ice Cream, 3 scoops", 55],
+    ["Ice Cream with Nuts", 75], ["Ice Cream with Honey & Nuts", 85]
+  ]},
+  { id: "pancake", name: "Pancake", table: {
+    cols: ["6 pcs", "12 pcs", "18 pcs", "24 pcs"],
+    rows: [
+      ["Nutella",              30, 65, 85, 100],
+      ["Lotus",                30, 65, 85, 100],
+      ["Dark & White Nutella", 30, 65, 85, 100],
+      ["Kinder",               30, 65, 85, 100],
+      ["Pistachio",            40, 75, 90, 120],
+      ["Mix",                  40, 75, 90, 120]
+    ]
+  }}
+];
+
+function renderLogo() {
+  const leaves = [];
+  const cx = 50, cy = 50, r = 37, n = 8;
+  for (let side = 0; side < 2; side++) {
+    for (let i = 0; i < n; i++) {
+      const t = i / (n - 1);
+      let a = 105 + t * 130;
+      if (side === 1) a = 180 - a;
+      const rad = a * Math.PI / 180;
+      const x = cx + r * Math.cos(rad), y = cy + r * Math.sin(rad);
+      const tilt = side === 0 ? -28 : 28;
+      leaves.push(`<ellipse cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" rx="3.1" ry="7.5" transform="rotate(${(a + tilt).toFixed(1)} ${x.toFixed(2)} ${y.toFixed(2)})"/>`);
+    }
+  }
+  return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#B3242E" stroke="#D9A93F" stroke-width="2"/><g fill="#D9A93F">${leaves.join("")}</g><path d="M33 33 L50 68 L67 33" fill="none" stroke="#F6E4B3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+document.getElementById("logo").innerHTML = renderLogo();
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+const scroller = document.getElementById("scroller");
+const chipsEl = document.getElementById("chips");
+
+MENU.forEach((cat, index) => {
+  const chip = document.createElement("button");
+  chip.type = "button";
+  chip.className = "chip";
+  chip.textContent = cat.name;
+  chip.dataset.target = "cat-" + cat.id;
+  if (index === 0) chip.setAttribute("aria-current", "true");
+  chipsEl.appendChild(chip);
+
+  const sec = document.createElement("section");
+  sec.className = "cat-section";
+  sec.id = "cat-" + cat.id;
+
+  let html = `<h3 class="cat-title">${esc(cat.name)}</h3>`;
+  if (cat.note) html += `<p class="cat-note">${esc(cat.note)}</p>`;
+  
+  html += `<div class="cat-banner"><img src="${PHOTOS[cat.id]}" alt="${esc(cat.name)}" loading="lazy"></div>`;
+
+  if (cat.items) {
+    html += `<div class="items-grid">`;
+    cat.items.forEach(([name, price, desc]) => {
+      html += `
+        <div class="item-card">
+          <div class="item-info">
+            <span class="item-name">${esc(name)}</span>
+            ${desc ? `<span class="item-desc">${esc(desc)}</span>` : ""}
+          </div>
+          <div class="item-price">${esc(price)}<span>EGP</span></div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (cat.table) {
+    html += `<div class="table-container"><table class="custom-tbl"><thead><tr><th>Flavor</th>`;
+    cat.table.cols.forEach(col => { html += `<th>${esc(col)}</th>`; });
+    html += `</tr></thead><tbody>`;
+    cat.table.rows.forEach(row => {
+      html += `<tr><td>${esc(row[0])}</td>`;
+      row.slice(1).forEach(p => { html += `<td>${esc(p)}</td>`; });
+      html += `</tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+
+  sec.innerHTML = html;
+  scroller.appendChild(sec);
+});
+
+/* ---------- STANDARD CLICK EVENTS (OPTIMIZED FOR iOS & ANDROID) ---------- */
+const overlay = document.getElementById("overlay");
+const openBtn = document.getElementById("open-menu");
+const closeBtn = document.getElementById("close-menu");
+
+function toggleMenu(show) {
+  if (show) {
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  } else {
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+}
+
+openBtn.addEventListener("click", function() {
+  toggleMenu(true);
+});
+
+closeBtn.addEventListener("click", function() {
+  toggleMenu(false);
+});
+
+function setActiveChip(id) {
+  chipsEl.querySelectorAll(".chip").forEach(c => {
+    if (c.dataset.target === id) {
+      c.setAttribute("aria-current", "true");
+      chipsEl.scrollTo({ left: c.offsetLeft - chipsEl.clientWidth / 2 + c.clientWidth / 2, behavior: "smooth" });
+    } else {
+      c.removeAttribute("aria-current");
+    }
+  });
+}
+
+chipsEl.addEventListener("click", function(e) {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  const target = document.getElementById(chip.dataset.target);
+  if (target) {
+    scroller.scrollTo({ top: target.offsetTop - 10, behavior: "smooth" });
+    setActiveChip(chip.dataset.target);
+  }
+});
+
+let ticking = false;
+scroller.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const scrollY = scroller.scrollTop + 100;
+      for (const cat of MENU) {
+        const sec = document.getElementById("cat-" + cat.id);
+        if (sec && sec.offsetTop <= scrollY && (sec.offsetTop + sec.offsetHeight) > scrollY) {
+          setActiveChip("cat-" + cat.id);
+          break;
+        }
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+</script>
+</body>
+</html>
